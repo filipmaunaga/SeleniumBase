@@ -13,6 +13,7 @@ namespace SeleniumBase
 {
     class Tests : SeleniumBaseClass
     {
+        
         [Test]
         public void RunTest()
         {
@@ -28,6 +29,7 @@ namespace SeleniumBase
             this.DoWait(2);
             selection.SelectByValue("ba");
             this.DoWait(2);
+            
         }
         [SetUp]
         public void SetUpTests()
