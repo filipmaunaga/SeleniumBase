@@ -41,14 +41,43 @@ namespace SeleniumBase
             var selection = new SelectElement(continent);
             selection.SelectByText("Europe");
             DoWait(2);
+        }
+        [Test]
+        public void Test2()
+        {
+            this.Navigate("http://test.qa.rs/");
+            this.FindElement(By.LinkText("Kreiraj novog korisnika"))?.Click();
+            this.FindElement(By.Name("ime"))?.SendKeys("Dragan");
+            this.FindElement(By.Name("prezime"))?.SendKeys("Jovic");
+            this.FindElement(By.Name("korisnicko"))?.SendKeys("draganjovic1990");
+            this.FindElement(By.Name("email"))?.SendKeys("draganjovic@gmail.com");
+            this.FindElement(By.Name("telefon"))?.SendKeys("063/9090000");
+            IWebElement zemlja = this.FindElement(By.Name("zemlja"));
+            var selection = new SelectElement(zemlja);
+            selection.SelectByValue("bih");
+            DoWait(2);
+            this.FindElement(By.XPath("//input[@name='pol' and @value='m']"))?.Click();
+            this.FindElement(By.Name("obavestenja"))?.Click();
+            this.FindElement(By.Name("promocije"))?.Click();
+            this.FindElement(By.Name("register"))?.Click();
+            DoWait(2);
+
+            IWebElement success= this.FindElement(By.XPath("//div[@class='alert alert-success' and @role='alert']"));
+            if (success != null)
+            {
+                Assert.Pass("Korisnik je uspesno registrovan i test je prosao");
+            } else
+            {
+                Assert.Fail("Korisnik nije mogao da bude registrovan i test nije prosao");
+
+
+            }
 
 
 
 
 
-
-
-
+            
         }
         [SetUp]
         public void SetUpTests()
