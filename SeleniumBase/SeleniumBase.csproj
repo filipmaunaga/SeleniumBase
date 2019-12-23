@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Cas30.cs" />
     <Compile Include="Cas31.cs" />
+    <Compile Include="Cas33.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeleniumBaseClass.cs" />
