@@ -38,13 +38,38 @@ namespace SeleniumBase
             this.FindElement(By.XPath("//div[@id='searchBottom']/input[@type='submit']"))?.Click();
 
             DoWait(2);
-            this.FindElement(By.LinkText("HP OMEN Z7Y57AA TN"))?.Click();
+            this.FindElement(By.XPath("HP OMEN Z7Y57AA TN"))?.Click();
             DoWait(2);
-            IWebElement price= this.FindElement(By.XPath("//div[@class='price']"));
-            string cena = price.Text.Remove(2, 1);
-            Assert.AreEqual(29990, cena);
-         
+            IWebElement price = this.FindElement(By.XPath("//div[@class='price']"));
+            string cena = price.Text.Trim();
+            Assert.AreEqual("29.990", cena);
+        }
 
+         [Test]
+        public void Test2()
+        {
+            this.Navigate("http://shop.qa.rs/");
+            DoWait(2);
+            IWebElement small = this.FindElement(By.XPath("(//select[@name='quantity'])[2]"));
+            var selection = new SelectElement(small);
+            selection.SelectByValue("6");
+            DoWait(1);
+            this.FindElement(By.XPath("(//input[@type='submit' and @value='ORDER NOW'])[2]"))?.Click();
+            IWebElement total1 = this.FindElement(By.XPath("//div[@class='panel-footer'])[2]"));
+            DoWait(2);
+           
+
+            IWebElement total2 = this.FindElement(By.XPath("//tbody//tr[1]/td[4]"));
+            DoWait(2);
+            string t1 = total1.Text.Substring(1);
+
+            string t2 = total2.Text.Substring(1);
+
+            int m1 = Convert.ToInt32(t1);
+
+            int m2 = Convert.ToInt32(t2);
+
+            Assert.AreEqual(6*m1, m2);
 
 
         }
